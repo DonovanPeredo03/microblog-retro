@@ -1,1 +1,20 @@
-ECHO est  activado.
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Microblog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Microblog</h1>
+    <form id="postForm">
+      <input type="text" id="postAuthor" placeholder="Tu nombre" required>
+      <textarea id="postContent" placeholder="Escribe tu post..." required></textarea>
+      <button type="submit">Publicar</button>
+    </form>
+    <div id="postsContainer"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
