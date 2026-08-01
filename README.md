@@ -1,57 +1,191 @@
-# Microblog Retro
+# Retro Microblog
 
-Proyecto académico de microblog con estética retro, desplegado en **AWS** utilizando **S3** para el frontend, **Lambda** para el backend y **API Gateway** para la integración. Incluye scripts de infraestructura con **Terraform** como referencia.
+A serverless microblog application deployed on **Amazon Web Services (AWS)** using cloud-native services to deliver a scalable web application.
 
----
-
-## Arquitectura en AWS
-
-El proyecto se compone de tres servicios principales:
-
-- **Frontend**: alojado en un bucket S3 con Static Website Hosting habilitado.  
-- **Backend**: función Lambda en Node.js 18.x que devuelve posts en formato JSON.  
-- **API Gateway**: expone el backend mediante un endpoint HTTP y habilita CORS para el consumo desde el frontend.  
-- **Infraestructura opcional**: definida en `infra/main.tf` para automatizar la creación de recursos.
-
-### Diagrama de arquitectura (texto)
-[ Usuario ] | v [ Navegador Web ] | v [ S3 Bucket - Sitio Estático ] | v [ API Gateway ] ---> [ AWS Lambda ] ---> [ DynamoDB 
-
+The project demonstrates the implementation of a serverless architecture with **Amazon S3**, **AWS Lambda**, **Amazon API Gateway**, and **Terraform** for infrastructure management.
 
 ---
 
-## Estructura del proyecto
+## Features
+
+- Retro-inspired responsive user interface
+- Serverless backend powered by AWS Lambda
+- RESTful API exposed through Amazon API Gateway
+- Static website hosting with Amazon S3
+- Infrastructure as Code (IaC) using Terraform
+- Cloud-native architecture
+- Scalable deployment
 
 ---
 
-## Frontend en AWS S3
+## Tech Stack
 
-1. Crear un bucket S3 en AWS (ejemplo: `microblog-retro-frontend`).  
-2. Activar **Static Website Hosting** en el bucket.  
-3. Subir los archivos `index.html`, `style.css`, `app.js`.  
-4. Configurar permisos públicos de lectura para los objetos.  
-5. Obtener la URL pública del sitio desde la configuración de hosting.
-
----
-
-## Backend en AWS Lambda
-
-1. Crear una función Lambda en AWS.  
-2. Seleccionar runtime **Node.js 18.x**.  
-3. Configurar el handler como `lambda_function.handler`.  
-4. Subir el archivo `backend.zip` que contiene `lambda_function.js` y `package.json`.  
-5. Guardar y probar la función desde la consola de AWS.
+| Category | Technologies |
+|----------|--------------|
+| **Frontend** | HTML5, CSS3, JavaScript |
+| **Backend** | AWS Lambda (Node.js 18.x) |
+| **API** | Amazon API Gateway |
+| **Storage** | Amazon S3 |
+| **Infrastructure** | Terraform |
+| **Cloud Platform** | Amazon Web Services (AWS) |
 
 ---
 
-## API Gateway
+## Technical Highlights
 
-1. Crear una API REST en API Gateway.  
-2. Definir un recurso `/posts` con método **GET**.  
-3. Integrar el recurso con la función Lambda.  
-4. Habilitar **CORS** para permitir llamadas desde el frontend.  
-5. Copiar la URL del endpoint generado por API Gateway.
+- Designed a serverless architecture using AWS managed services.
+- Hosted the frontend as a static website on Amazon S3.
+- Developed backend functionality using AWS Lambda with Node.js.
+- Exposed REST endpoints through Amazon API Gateway.
+- Automated infrastructure provisioning with Terraform.
+- Applied cloud-native architecture principles for scalability and low operational overhead.
 
-En el frontend (`app.js`), actualizar el `fetch` para apuntar al endpoint de API Gateway:
+---
+
+## Architecture
+
+```text
+                User
+                  │
+                  ▼
+            Web Browser
+                  │
+                  ▼
+     Amazon S3 (Static Website)
+                  │
+                  ▼
+      Amazon API Gateway
+                  │
+                  ▼
+        AWS Lambda (Node.js)
+                  │
+                  ▼
+             Amazon DynamoDB
+```
+
+---
+
+## Project Structure
+
+```text
+microblog-retro/
+│
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+│
+├── backend/
+│   ├── lambda_function.js
+│   ├── package.json
+│   └── backend.zip
+│
+├── infra/
+│   └── main.tf
+│
+└── README.md
+```
+
+---
+
+## Deployment
+
+### Frontend
+
+The frontend is deployed as a static website using **Amazon S3 Static Website Hosting**.
+
+### Backend
+
+The backend runs as an **AWS Lambda** function using the **Node.js 18.x** runtime.
+
+### API
+
+The application exposes its REST endpoints through **Amazon API Gateway** with CORS enabled.
+
+### Infrastructure
+
+Infrastructure provisioning can be automated using the Terraform configuration located in:
+
+```text
+infra/main.tf
+```
+
+---
+
+## Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/DonovanPeredo03/microblog-retro.git
+cd microblog-retro
+```
+
+---
+
+### Deploy the Frontend
+
+1. Create an Amazon S3 bucket.
+2. Enable **Static Website Hosting**.
+3. Upload the files inside the `frontend/` directory.
+4. Configure public read permissions.
+5. Copy the generated website URL.
+
+---
+
+### Deploy the Backend
+
+1. Create an AWS Lambda function.
+2. Select the **Node.js 18.x** runtime.
+3. Set the handler to:
+
+```text
+lambda_function.handler
+```
+
+4. Upload `backend.zip`.
+5. Deploy the function.
+
+---
+
+### Configure API Gateway
+
+1. Create a REST API.
+2. Create a `/posts` resource.
+3. Add the **GET** method.
+4. Integrate it with AWS Lambda.
+5. Enable CORS.
+6. Deploy the API.
+
+Update the frontend endpoint inside `app.js`:
 
 ```javascript
-const res = await fetch("https://TU_API_GATEWAY_URL/posts");
+const res = await fetch("https://YOUR_API_GATEWAY_URL/posts");
+```
+
+---
+
+## Future Improvements
+
+- User authentication with Amazon Cognito
+- CRUD operations for posts
+- DynamoDB integration for persistent storage
+- Image uploads using Amazon S3
+- CI/CD pipeline with GitHub Actions
+- CloudWatch monitoring
+- Custom domain with Route 53
+- HTTPS using AWS Certificate Manager
+
+---
+
+## Author
+
+**Samuel Donovan Peredo Jiménez**
+
+Computer Science Student  
+University of Guadalajara (UDG)
+
+**Backend Development • Cloud Computing • Data Intelligence**
+
+- GitHub: https://github.com/DonovanPeredo03
+- LinkedIn: https://www.linkedin.com/in/samuel-donovan-peredo-jimenez-16275b385/
